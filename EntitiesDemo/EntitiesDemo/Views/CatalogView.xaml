@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="EntitiesDemo.Views.CatalogView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EntitiesDemo.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="658">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition MinHeight="50" MaxHeight="90"/>
+            <RowDefinition MinHeight="320"/>
+            <RowDefinition MinHeight="50" MaxHeight="90"/>
+        </Grid.RowDefinitions>
+
+        <Image Source="\Images\DemoLogo.png" Margin="10"/>
+
+        <TextBox Grid.Column="1"
+            Width="480" 
+                     Style="{StaticResource SearchBoxStyle}"
+                     >
+            <TextBox.InputBindings>
+                <KeyBinding Key="Enter" Command="{Binding SearchCommand}"/>
+            </TextBox.InputBindings>
+        </TextBox>
+
+        <ListBox Grid.Row="1"
+                 Background="Transparent"
+                 Foreground="GhostWhite"
+                 Margin="10,0,0,0"
+                 ItemsSource="{Binding EntityTypes}"
+                 SelectedItem="{Binding SelectedEntityType, Mode=TwoWay}"
+                 VerticalAlignment="Stretch"/>
+
+        <ListView Grid.Row="1" Grid.Column="1"
+                  ItemsSource="{Binding CurrentPage}"
+                  VerticalAlignment="Stretch"/>
+
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,30,0"
+                    VerticalAlignment="Center"
+                    >
+            <Button Command="{Binding GoToFirstPage}">
+                <TextBlock Text="≪" Margin="0,0,0,2"/>
+            </Button>
+            <Button Command="{Binding GoToPreviousPage}">
+                <TextBlock Text="&lt;" Margin="0,0,0,2"/>
+            </Button>
+
+            <TextBox Style="{StaticResource PageTextBoxStyle}" Margin="0,0,5,0">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding GoToSpecificPageCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+
+            <Button Command="{Binding GoToNextPage}">
+                <TextBlock Text="&gt;" Margin="0,0,0,2"/>
+            </Button>
+            <Button Command="{Binding GoToLastPage}">
+                <TextBlock Text="≫" Margin="0,0,0,2"/>
+            </Button>
+        </StackPanel>
+        
+    </Grid>
+</UserControl>
