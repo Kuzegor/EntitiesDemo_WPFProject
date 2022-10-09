@@ -5,13 +5,13 @@
                     xmlns:viewmodels="clr-namespace:EntitiesDemo.ViewModels"
                     xmlns:views="clr-namespace:EntitiesDemo.Views">
 
-    <Style TargetType="ListView">
+    <Style TargetType="ListView" x:Key="CellsListViewStyle">
         <Style.Setters>
 
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="GhostWhite"/>
             <Setter Property="BorderThickness" Value="0.1"/>
-
+            <Setter Property="ItemContainerStyle" Value="{DynamicResource CellsListViewItemStyle}"/>
             <Setter Property="ItemsPanel">
                 <Setter.Value>
                     <ItemsPanelTemplate>
@@ -24,7 +24,7 @@
         </Style.Setters>
     </Style>
 
-    <Style TargetType="{x:Type ListViewItem}">
+    <Style TargetType="{x:Type ListViewItem}" x:Key="CellsListViewItemStyle">
         <Style.Setters>
             <Setter Property="Template" >
                 <Setter.Value>

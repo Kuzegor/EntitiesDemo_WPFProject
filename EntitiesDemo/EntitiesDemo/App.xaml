@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="Styles/ListBoxStyle.xaml"/>
                 <ResourceDictionary Source="Styles/SearchBoxStyle.xaml"/>
                 <ResourceDictionary Source="Styles/PageTextBoxStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ComboBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewmodels:CatalogViewModel}">

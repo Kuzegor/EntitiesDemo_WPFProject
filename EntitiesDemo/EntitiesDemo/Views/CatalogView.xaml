@@ -38,18 +38,39 @@
 
         <ListView Grid.Row="1" Grid.Column="1"
                   ItemsSource="{Binding CurrentPage}"
-                  VerticalAlignment="Stretch"/>
+                  VerticalAlignment="Stretch"
+                  Style="{StaticResource CellsListViewStyle}"/>
 
-        <StackPanel Grid.Row="3" Grid.ColumnSpan="2"
+        <StackPanel Grid.Row="3" Grid.Column="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    Margin="30,0,0,0"
+                    VerticalAlignment="Center">
+            
+            <TextBlock Text="Items Per Page:"
+                       Foreground="GhostWhite"
+                       FontSize="14"
+                       Margin="0,0,0,0"
+                       VerticalAlignment="Center"/>
+
+            <ComboBox ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle}" 
+                      Margin="10,0,0,0"
+                      FontSize="14"
+                      VerticalAlignment="Center"
+                      ItemsSource="{Binding ItemsPerPage}"
+                      SelectedItem="{Binding SelectedItemsPerPage, Mode=TwoWay}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="3" Grid.Column="1"
                     Orientation="Horizontal"
                     HorizontalAlignment="Right"
                     Margin="0,0,30,0"
                     VerticalAlignment="Center"
                     >
-            <Button Command="{Binding GoToFirstPage}">
+            <Button Command="{Binding GoToFirstPage}" Cursor="Hand">
                 <TextBlock Text="≪" Margin="0,0,0,2"/>
             </Button>
-            <Button Command="{Binding GoToPreviousPage}">
+            <Button Command="{Binding GoToPreviousPage}" Cursor="Hand">
                 <TextBlock Text="&lt;" Margin="0,0,0,2"/>
             </Button>
 
@@ -59,10 +80,10 @@
                 </TextBox.InputBindings>
             </TextBox>
 
-            <Button Command="{Binding GoToNextPage}">
+            <Button Command="{Binding GoToNextPage}" Cursor="Hand">
                 <TextBlock Text="&gt;" Margin="0,0,0,2"/>
             </Button>
-            <Button Command="{Binding GoToLastPage}">
+            <Button Command="{Binding GoToLastPage}" Cursor="Hand">
                 <TextBlock Text="≫" Margin="0,0,0,2"/>
             </Button>
         </StackPanel>

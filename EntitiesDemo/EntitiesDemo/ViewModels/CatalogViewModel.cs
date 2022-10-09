@@ -106,6 +106,62 @@ namespace EntitiesDemo.ViewModels
             }
         }
 
+        private ObservableCollection<int> itemsPerPage;
+        /// <summary>
+        /// Collection of integers that represent how many items are displayed on one page
+        /// </summary>
+        public ObservableCollection<int> ItemsPerPage
+        {
+            get { return itemsPerPage; }
+            set { itemsPerPage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int selectedItemsPerPage;
+        /// <summary>
+        /// Currently selected number of ItemsPerPage
+        /// </summary>
+        public int SelectedItemsPerPage
+        {
+            get { return selectedItemsPerPage; }
+            set 
+            { 
+                selectedItemsPerPage = value;
+
+                //this transfers user to the page that contains items from the page that was selected before SelectedItemsPerPage was changed
+                if (CurrentPage.Count > 0)
+                {
+                    Entity lastEntity = CurrentPage[CurrentPage.Count/2];
+                    Pages = PopulatePages(EntitiesList);
+                    foreach (ObservableCollection<Entity> page in Pages)
+                    {
+                        foreach (Entity entity in page)
+                        {
+                            if (entity.Id == lastEntity.Id)
+                            {
+                                CurrentPage = page;
+                                CurrentPageNumber = (Pages.FindIndex(x => x.Contains(entity)))+1;
+                                break;
+                            }
+                        }
+                        if (CurrentPage == page)
+                        {
+                            break;
+                        }
+                    } 
+                }
+                else
+                {
+                    Pages = PopulatePages(EntitiesList);
+                    CurrentPage = Pages[0];
+                    CurrentPageNumber = 1;
+                }
+                OnPropertyChanged();
+            }
+        }
+
+
         public DelegateCommand GoToLastPage { get; set; }
         public DelegateCommand GoToFirstPage { get; set; }
         public DelegateCommand GoToNextPage { get; set; }
@@ -123,6 +179,9 @@ namespace EntitiesDemo.ViewModels
             EntityTypes = new ObservableCollection<EntityType>(EntityTypesList);
             EntityTypes.Insert(0,new EntityType { Id = -1, TypeName = "All" });
             SelectedEntityType = EntityTypes[0];
+
+            ItemsPerPage = new ObservableCollection<int>{ 10, 30, 50, 100, 200 };
+            SelectedItemsPerPage = ItemsPerPage[0];
 
             if (EntitiesList.Count > 0)
             {
@@ -188,7 +247,7 @@ namespace EntitiesDemo.ViewModels
             pages.Add(new ObservableCollection<Entity>());
             for (int i = 0; i < entities.Count; i++)
             {                
-                if (pages[index].Count < 10)
+                if (pages[index].Count < SelectedItemsPerPage)
                 {
                     pages[index].Add(entities[i]);
                 }
