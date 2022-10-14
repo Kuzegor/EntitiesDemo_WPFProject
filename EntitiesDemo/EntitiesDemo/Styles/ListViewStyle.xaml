@@ -39,7 +39,14 @@
     <Style TargetType="Button" x:Key="ListViewButtonStyle">
         <Style.Setters>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Background" Value="#FF75209A"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="1,2" StartPoint="0,0">
+                        <GradientStop Color="#FF7801A4" Offset="0.45"/>
+                        <GradientStop Color="#FFB618C5" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
             <Setter Property="Foreground" Value="GhostWhite"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -102,10 +109,24 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FF9B2DD2"/>
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush EndPoint="1,2" StartPoint="0,0">
+                            <GradientStop Color="#FF7819A4" Offset="0.45"/>
+                            <GradientStop Color="#FFB678C9" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
             </Trigger>
             <Trigger Property="IsMouseCaptured" Value="True">
-                <Setter Property="Background" Value="#FF9B2DD9"/>
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush EndPoint="1,2" StartPoint="0,0">
+                            <GradientStop Color="#FF7839A4" Offset="0.45"/>
+                            <GradientStop Color="#FFB698C9" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
