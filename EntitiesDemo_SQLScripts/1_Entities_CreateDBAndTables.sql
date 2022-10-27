@@ -1,3 +1,9 @@
+begin
+create database Entities;
+end
+go
+
+begin
 use Entities;
 
 create table EntityTypes(
@@ -10,3 +16,4 @@ EntityName nvarchar(100),
 EntityTypeId int references EntityTypes(id) on delete set null on update cascade,
 EntityPrice decimal,
 EntityDescription nvarchar(max));
+end
